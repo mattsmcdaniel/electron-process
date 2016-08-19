@@ -56,9 +56,9 @@ function run(moduleHash, funcName, args) {
     if (_.some(args, _.isFunction)) {
       // When a callback is executed in the background process it sends an
       // IPC event named 'CALLBACK'.
-      ipcRenderer.on('CALLBACK', callbackCallback.bind(this, functionsById));
+      ipcRenderer.once('CALLBACK', callbackCallback.bind(this, functionsById));
     }
-    ipcRenderer.on('BACKGROUND_REPLY', taskCompleteCallback.bind(this, eventKey, resolve, reject));
+    ipcRenderer.once('BACKGROUND_REPLY', taskCompleteCallback.bind(this, eventKey, resolve, reject));
     ipcRenderer.send('BACKGROUND_START', payload);
   });
 }
