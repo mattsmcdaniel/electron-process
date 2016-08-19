@@ -62,7 +62,8 @@ const background = {
       registerListeners();
       hasRegisteredListeners = true;
     }
-    backgroundTasks[objectHash(backgroundModule)] = backgroundModule;
+    const key = backgroundModule.ipcID || objectHash(backgroundModule);
+    backgroundTasks[key] = backgroundModule;
   }
 };
 
